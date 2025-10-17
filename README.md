@@ -88,7 +88,7 @@ RadStack/
 
 | Explainability | Latency Histogram | Policy Cost Frontier |
 |----------------|------------------|----------------------|
-| ![A17](Results/plots/A17_shap_summary_lf.png) | ![hist](Results/plots/hist_processing_time_ms.png) | ![policy](Results/plots/policy_top20_cost.png) |
+| ![A17](Results/plots/A17_shap_summary_IF.png) | ![hist](Results/plots/hist_processing_time_ms.png) | ![policy](Results/plots/policy_top20_cost.png) |
 
 ---
 
