@@ -152,7 +152,7 @@ If you use **RadStack** or the **RAdA dataset**, please cite:
 ```
 @article{radstack2025,
   title={RadStack: An Unsupervised Risk-Adaptive Access Control Framework for OpenStack},
-  author={Your Name and Contributors},
+  author={Muhammad Afaq , Misha Urooj Khan, Ahmad Suleman},
   journal={IEEE Transactions on Cloud Computing},
   year={2025},
   note={Dataset: Risk-Adaptive DevStack Dataset (RAdA)}
