@@ -1,0 +1,13 @@
+feature,perm_importance
+processing_time_ms,0.2678182563063027
+response_size_bytes,0.13923666628645964
+status,0.12745060638890207
+num_headers,0.1147577628189619
+headers_size_bytes,0.10677988380526343
+process_id,0.09606153767893383
+num_vars,0.09107498770031636
+vars_size_bytes,0.05682029897360745
+application_number,0.0
+http_version,0.0
+core_switches,0.0
+core_number,0.0
