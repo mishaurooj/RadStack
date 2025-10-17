@@ -42,9 +42,9 @@ This folder contains **validated experimental outputs** for all ablations (A1–
 
 | Sensitivity Grid | Permutation Importance | SHAP Summary |
 |------------------|-----------------------|---------------|
-| ![A6](../plots/A6_sensitivity_heatmap.png) | ![A12](../plots/A12_perm_importance_top20.png) | ![A17](../plots/A17_shap_summary_lf.png) |
+| ![A6](../plots/A6_sensitivity_heatmap.png) | ![A12](../plots/A12_perm_importance_top20.png) | ![A17](../plots/A17_shap_summary_IF.png) |
 
-| Scalability | Policy Frontier | Model Disagreement |
+| Scalability | Policy Frontier | Dataset |
 |--------------|-----------------|--------------------|
 | ![A15](../plots/A15_scalability.png) | ![policy](../plots/policy_top20_cost.png) | ![dataset](../plots/dataset%20(1).png) |
 
