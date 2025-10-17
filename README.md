@@ -1,11 +1,4 @@
 # 🧠 RadStack: Unsupervised Risk-Adaptive Access Control for OpenStack
-
-![Architecture](proposed-architecture.png)
-
-> **RadStack** is a novel unsupervised risk-adaptive access control framework built on OpenStack Keystone logs. It integrates anomaly detection and adaptive decision-making through a lightweight, explainable ensemble.
-
----
-
 ## 📘 Overview
 
 **RadStack** introduces the **Risk-Adaptive DevStack Dataset (RAdA)** — a self-collected dataset containing over **444,000 Keystone events** with **31 engineered features** across five domains: Behavioral, System, Semantic, Temporal, and Outcome.
@@ -13,6 +6,14 @@
 It pioneers an **unsupervised ensemble pipeline** using Isolation Forest (IF), Local Outlier Factor (LOF), and One-Class SVM (OCSVM) to identify abnormal access patterns and dynamically adapt authorization policies with minimal overhead.
 
 ---
+
+
+![Architecture](proposed-architecture.png)
+
+> **RadStack** is a novel unsupervised risk-adaptive access control framework built on OpenStack Keystone logs. It integrates anomaly detection and adaptive decision-making through a lightweight, explainable ensemble.
+
+---
+
 
 ## 🧩 Repository Structure
 
