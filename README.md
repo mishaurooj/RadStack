@@ -1,146 +1,172 @@
 # 🧠 RadStack: Unsupervised Risk-Adaptive Access Control for OpenStack
-## 📘 Overview
 
-**RadStack** introduces the **Risk-Adaptive DevStack Dataset (RAdA)** — a self-collected dataset containing over **444,000 Keystone events** with **31 engineered features** across five domains: Behavioral, System, Semantic, Temporal, and Outcome.
-
-It pioneers an **unsupervised ensemble pipeline** using Isolation Forest (IF), Local Outlier Factor (LOF), and One-Class SVM (OCSVM) to identify abnormal access patterns and dynamically adapt authorization policies with minimal overhead.
-
----
-
+> **IEEE Transactions on Cloud Computing, 2025**
 
 ![Architecture](proposed-architecture.png)
 
-> **RadStack** is a novel unsupervised risk-adaptive access control framework built on OpenStack Keystone logs. It integrates anomaly detection and adaptive decision-making through a lightweight, explainable ensemble.
+![F1 Score](https://img.shields.io/badge/F1--Score-0.992-4CAF50?style=for-the-badge)
+![AUC](https://img.shields.io/badge/ROC--AUC-0.9993-2196F3?style=for-the-badge)
+![Latency](https://img.shields.io/badge/Latency%20Overhead-11.6%25-FFB300?style=for-the-badge)
+![License](https://img.shields.io/badge/License-CC--BY--NC--SA%204.0-blue?style=for-the-badge)
 
 ---
 
+## 📘 Overview
+
+**RadStack** is an **unsupervised, explainable, and risk-adaptive access control (RAdAC) framework** for **OpenStack Keystone**.  
+It autonomously detects anomalous identity behaviors **without labeled data**, fusing geometric, density, and boundary-based anomaly detectors to dynamically enforce graded access policies.
+
+Built atop the **Risk-Adaptive DevStack Dataset (RAdA)** — a self-collected dataset of **over 222,000 events and 31 engineered features** — RadStack achieves near-perfect accuracy and interpretability while keeping **latency overhead under 12%**.
+
+---
 
 ## 🧩 Repository Structure
 
-```
+```plaintext
 RadStack/
 │
-├── 📁 RAdA-dataset/             # Self-collected OpenStack Keystone dataset
+├── 📁 RAdA-dataset/             # Risk-Adaptive DevStack Dataset
 │   ├── keystone_features.csv
-│   ├── keystone_features_parsed.csv
-│   ├── keystone_features_parsed_struct.csv
 │   ├── parser_v1.py
-│   └── praser.py
+│   └── schema_description.txt
 │
 ├── 📁 Codes/
-│   ├── 1-RadStack-visualization.ipynb     # Feature analysis & visualization
-│   └── 2-RadStack-ablation-studies.ipynb  # Ablation & ensemble performance
+│   ├── 1-RadStack-visualization.ipynb
+│   ├── 2-RadStack-ablation-studies.ipynb
+│   └── ensemble_fusion_analysis.ipynb
 │
 ├── 📁 Results/
-│   ├── 📁 Excel/       # Metrics, ablations, and sensitivity CSVs
-│   ├── 📁 models/      # Saved IF, LOF, and OCSVM models
-│   └── 📁 plots/       # Figures used in the paper
+│   ├── 📁 metrics/        # Tables III–XVI results
+│   ├── 📁 plots/          # Visuals (SHAP, ablations, scalability)
+│   └── 📁 models/         # Saved IF, LOF, OCSVM ensembles
 │
 └── README.md
 ```
 
 ---
 
-## 🚀 Highlights
+## 🚀 Framework Summary
 
-| Novelty | Description |
-|----------|--------------|
-| 🧠 **Unsupervised RAdAC** | First unsupervised risk-adaptive access control framework for OpenStack Keystone |
-| 📊 **RAdA Dataset** | 31-feature DevStack dataset with behavioral, system, and semantic features |
-| 🔀 **Ensemble Learning** | Combines IF, LOF, and OCSVM through adaptive weighted fusion |
-| ⚡ **Low Overhead** | Only 11.6% increase in Keystone response latency |
-| 🔍 **Explainable ML** | SHAP-based interpretability and A1–A20 ablation validation |
-| ♻️ **Fully Reproducible** | Ready-to-run Jupyter notebooks and data release |
-
----
-
-## 📈 Key Results
-
-### **Model Performance**
-
-| Model | % Flagged Anomalous | Comment |
-|--------|--------------------|----------|
-| Isolation Forest | **8.5%** | Stable & balanced |
-| LOF | **12.3%** | Sensitive, high FP |
-| One-Class SVM | **5.7%** | Conservative boundary |
-
-### **Risk-Adaptive Policy Decisions**
-
-| Decision | % Requests |
-|-----------|-------------|
-| Allow | **87%** |
-| Step-Up | **8%** |
-| Deny | **5%** |
-
-### **System Overhead**
-
-| Setup | Latency (ms) | Overhead |
-|--------|---------------|-----------|
-| Keystone Baseline | 120 | – |
-| RadStack Active | 134 | **+11.6%** |
-
----
-
-## 📊 Visual Results
-
-| Sensitivity | Feature Importance | Scalability |
-|--------------|--------------------|--------------|
-| ![A6](Results/plots/A6_sensitivity_heatmap.png) | ![A12](Results/plots/A12_perm_importance_top20.png) | ![A15](Results/plots/A15_scalability.png) |
-
-| Explainability | Latency Histogram | Policy Cost Frontier |
-|----------------|------------------|----------------------|
-| ![A17](Results/plots/A17_shap_summary_IF.png) | ![hist](Results/plots/hist_processing_time_ms.png) | ![policy](Results/plots/policy_top20_cost.png) |
-
----
-
-## ⚙️ Pipeline Summary
-
-**1️⃣ Data Source:** Keystone auth, policy, and token logs  
-**2️⃣ Feature Engineering:** Behavioral, System, Semantic, Temporal, Outcome  
-**3️⃣ Ensemble Detection:** IF + LOF + OCSVM → Weighted Fusion  
-**4️⃣ Decision Layer:** Risk-Adaptive Policy (`Allow`, `Step-Up`, `Deny`)  
-**5️⃣ Explainability Loop:** SHAP + Ablation (A1–A20)
-
----
-
-## 🧪 Ablation Studies (A1–A20 Summary)
-
-| Ablation ID | Study Focus | Observation |
-|--------------|--------------|--------------|
-| A2 | –Behavioral | ↓ Precision (–5%) |
-| A3 | –System | ↓ Recall (–4%) |
-| A4 | –Semantic | ↓ Recall (–3%) |
-| A5 | –Temporal | ↓ AUC (–0.02) |
-| A6 | Sensitivity Grid | Stability Zone Identified |
-| A10–A20 | Explainability | Ensemble Consistency Confirmed |
+| 🧩 Stage | 📝 Description |
+|:--------|:---------------|
+| 🧮 **Feature Engineering** | 31 attributes grouped into 5 domains — Behavioral, System-level, Semantic, Temporal, and Outcome |
+| ⚙️ **Core Models** | Isolation Forest (IF), Local Outlier Factor (LOF), One-Class SVM (OCSVM) |
+| 🧠 **Fusion Layer** | Rank-based + Weighted ensemble (0.5 : 0.2 : 0.3) |
+| 🔐 **Policy Mapping** | Risk-adaptive tri-level decision: *Allow*, *Step-up*, *Deny* |
+| 🔍 **Explainability** | SHAP & permutation importance for transparency |
+| ⚡ **Performance** | **ROC-AUC = 0.999 · F1 = 0.992 · Overhead < 12%** |
 
 ---
 
 ## 🧬 Dataset: RAdA
 
-> The **Risk-Adaptive DevStack Dataset (RAdA)** was captured using an instrumented OpenStack DevStack deployment.  
-> It contains **auth**, **policy**, and **token** streams converted into 31 engineered features representing multi-layer user and system behavior.
+RAdA is an **instrumented DevStack dataset** capturing **authentication, policy, and token logs** under reproducible conditions.  
+Each record aggregates user and system-level indicators across five analytic perspectives:
 
-**Domains:**
-- Behavioral (e.g., request frequency, failure ratio)  
-- System (latency, response size, core switches)  
-- Semantic (endpoint class, resource sensitivity)  
-- Temporal (off-hours, weekend usage)  
-- Outcome (status code, success ratio)
+| Domain | Example Features |
+|:--------|:----------------|
+| 🧠 **Behavioral (B)** | request_rate, failure_ratio |
+| ⚙️ **System (S)** | processing_time_ms, core_switches |
+| 🗂️ **Semantic (M)** | endpoint_class, HTTP method |
+| ⏰ **Temporal (T)** | hour_of_day, off_hour_flag |
+| ✅ **Outcome (O)** | status_code, success_flag |
+
+> RAdA forms a reproducible benchmark for **unsupervised cloud identity analytics**.
 
 ---
 
-## 💡 Reproducibility
+## 📈 Experimental Results
+
+### 🔹 Baseline Performance
+
+| 🧪 Model | 🎯 ACC | 🧮 F1 | 📈 ROC-AUC | ⏱️ Inference (s) |
+|:------|:----:|:--:|:--------:|:-------------:|
+| Isolation Forest | 0.88 | 0.88 | 0.95 | 0.10 |
+| Local Outlier Factor | 🟩 **0.99** | 🟩 **0.99** | 🟦 **0.996** | 1.47 |
+| One-Class SVM | 🟩 **0.997** | 🟩 **0.997** | 🟦 **0.9999** | 2.05 |
+
+---
+
+### 🔹 Ensemble Fusion
+
+| ⚙️ Model | 🧮 F1 | 📈 ROC-AUC | 📊 PR-AUC | ⚡ Overhead |
+|:------|:--:|:--------:|:-------:|:----------:|
+| Unweighted Ensemble (ENS) | 🟩 **0.9925 ± 0.002** | 🟦 0.9993 | 🟦 0.9993 | 🟨 +11.6 % |
+| Weighted Ensemble (W-ENS) | 0.9920 | 0.9986 | 0.9977 | +11.6 % |
+
+---
+
+### 🔹 Policy Distribution
+
+| Decision | % Requests | Expected Cost |
+|:----------|:-----------:|:--------------:|
+| ✅ Allow | 87 % | 1.7 × 10⁵ |
+| ⚠️ Step-Up | 8 % | 2.0 × 10⁵ |
+| ⛔ Deny | 5 % | 4.4 × 10⁵ |
+
+---
+
+### 🔹 Sensitivity & Scaling
+
+| Test | Result |
+|:-----|:--------|
+| Contamination 0.03–0.12 | ROC-AUC > 🟩 **0.9995** |
+| Gaussian noise (2× var) | < 4 % degradation |
+| Temporal drift (5 folds) | AUC > 🟩 **0.96** |
+| Scaling effect | Min-Max normalization optimal (AUC = 0.995) |
+| Runtime (222k samples) | Fit ≈ 4.6 s  · Infer ≈ 5 s |
+
+---
+
+## 🔍 Explainability
+
+**Top SHAP & Permutation Features:**  
+📦 `response_size_bytes` · 🕒 `processing_time_ms` · 🧩 `num_headers` · ✅ `status_code`  
+
+> These features explain **> 50 % of anomaly variance**, ensuring transparent IAM decisions.
+
+| SHAP Summary | Permutation Importance |
+|:--------------|:----------------------|
+| ![SHAP](Results/plots/A17_shap_summary_IF.png) | ![Perm](Results/plots/A12_perm_importance_top20.png) |
+
+---
+
+## ⚖️ Comparative Evaluation
+
+| Reference | Domain | Interpret. | F1 | AUC | Latency (%) |
+|:-----------|:--------|:-----------:|:--:|:--:|:--:|
+| Gutierrez et al. (2024) | IDS | Low | 0.951 | 0.962 | 21.3 |
+| Mahmud & Lendák (2024) | Synthetic | Mid | 0.958 | 0.975 | 18.6 |
+| Asgarov et al. (2024) | Endpoints | Low | 0.950 | 0.963 | 16.8 |
+| Ding et al. (2025) | Time-Series | High | 0.987 | 0.989 | 38.4 |
+| Wang et al. (2025) | Graph | High | 0.988 | 0.993 | 34.1 |
+| 🧠 **RadStack (ours)** | IAM (OpenStack) | 🟩 **High** | 🟩 **0.992** | 🟦 **0.995** | 🟨 **11.7** |
+
+---
+
+## 🧪 Ablation Insights
+
+| Ablation | Removed | Observation |
+|:----------|:--------|:-------------|
+| A2 | Behavioral | ↓ Precision –5 % |
+| A3 | System | ↓ Recall –11 % |
+| A4 | Semantic | Minor change |
+| A5 | Temporal | Negligible impact |
+| A13 | Noise & Missing | < 4 % degradation |
+| A20 | Bootstrap | Significant improvement *(p = 0.0005)* |
+
+---
+
+## ⚙️ Reproducibility
 
 ```bash
-git clone https://github.com/<your-username>/RadStack.git
+# Clone and install
+git clone https://github.com/mishaurooj/RadStack.git
 cd RadStack
 pip install -r requirements.txt
 
-# Explore RAdA dataset
+# Run notebooks
 jupyter notebook Codes/1-RadStack-visualization.ipynb
-
-# Reproduce ablations and ensemble
 jupyter notebook Codes/2-RadStack-ablation-studies.ipynb
 ```
 
@@ -148,12 +174,10 @@ jupyter notebook Codes/2-RadStack-ablation-studies.ipynb
 
 ## 🧾 Citation
 
-If you use **RadStack** or the **RAdA dataset**, please cite:
-
-```
+```bibtex
 @article{radstack2025,
   title={RadStack: An Unsupervised Risk-Adaptive Access Control Framework for OpenStack},
-  author={Muhammad Afaq , Misha Urooj Khan, Ahmad Suleman},
+  author={Muhammad Afaq and Misha Urooj Khan and Ahmad Suleman},
   journal={IEEE Transactions on Cloud Computing},
   year={2025},
   note={Dataset: Risk-Adaptive DevStack Dataset (RAdA)}
@@ -164,11 +188,13 @@ If you use **RadStack** or the **RAdA dataset**, please cite:
 
 ## 🪪 License
 
-Released under **CC BY-NC-SA 4.0 License** — free for academic and non-commercial research with attribution.
+**CC BY-NC-SA 4.0** — for academic and non-commercial use with attribution.
 
 ---
 
-## 🌐 Project Summary
+## 🌐 Summary
 
-RadStack combines **machine learning, explainability, and cloud security** into a unified RAdAC framework for OpenStack Keystone.  
-It offers a reproducible, interpretable, and high-precision baseline for adaptive cloud access control research.
+RadStack merges **unsupervised anomaly detection** and **risk-adaptive authorization** into a reproducible and explainable pipeline.  
+It provides a **transparent, scalable, and high-precision** model for modern **cloud identity analytics**.
+
+> “RadStack bridges the interpretability gap between classical UAD and modern XAI — enabling measurable trust in cloud identity systems.” — *IEEE TCC 2025*
