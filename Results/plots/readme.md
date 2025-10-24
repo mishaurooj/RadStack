@@ -73,7 +73,7 @@
 
 ---
 
-## ✅ Reviewer Interpretation Summary
+## ✅ Summary
 
 | Figure | Validation Aspect | Interpretation |
 |---------|------------------|----------------|
@@ -96,6 +96,4 @@ Codes/2-RadStack-ablation-studies.ipynb
 ```
 No plot is post-edited or manually adjusted.  
 Color scales, thresholds, and metrics are **rendered automatically from data**, guaranteeing transparency and scientific authenticity.
-
-> “Every figure here speaks from data — not decoration.”
 
