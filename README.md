@@ -2,7 +2,7 @@
 
 > **IEEE Transactions on Cloud Computing, 2025**
 
-![Architecture](proposed-architecture.png)
+![Architecture](proposedarchitecture.png)
 
 ![F1 Score](https://img.shields.io/badge/F1--Score-0.992-4CAF50?style=for-the-badge)
 ![AUC](https://img.shields.io/badge/ROC--AUC-0.9993-2196F3?style=for-the-badge)
