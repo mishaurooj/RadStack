@@ -17,9 +17,18 @@ RadStack/
  └── README.md
 ```
 
+
+## High Level Overview
+![HighLevel](Results/plots/HighLevel.jpeg)
+
+## Flow
+![CommunicationV2](Results/plots/CommunicationV2.png)
+
+
+
 ---
 
-# 📊 Embedded Visualizations (From `Results/plots/`)
+# 📊  `Results
 
 Below are all integrated figures:
 
@@ -35,14 +44,9 @@ Below are all integrated figures:
 ## 4. A6 – Sensitivity Heatmap
 ![A6_sensitivity_heatmap](Results/plots/A6_sensitivity_heatmap.png)
 
-## 5. Communication (V2)
-![CommunicationV2](Results/plots/CommunicationV2.png)
 
 ## 6. Ensemble Structure, Component Quality, Stability
 ![Ensemble](Results/plots/Ensemble%20Structure,%20Component%20Quality,%20and%20Stability.png)
-
-## 7. High Level Overview
-![HighLevel](Results/plots/HighLevel.jpeg)
 
 ## 8. Policy Behavior & Middleware Overhead
 ![Policy Behavior](Results/plots/Policy%20Behavior,%20Enforcement%20Efficiency%20and%20Middleware%20Overhead.png)
